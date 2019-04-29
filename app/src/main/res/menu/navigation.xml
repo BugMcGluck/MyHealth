@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_weight"
+        android:icon="@mipmap/ic_weight"
+        android:title="@string/title_weight" />
+
+    <item
+        android:id="@+id/navigation_blood_pressure"
+        android:icon="@mipmap/ic_blood_pressure"
+        android:title="@string/title_blood_pressure" />
+
+    <item
+        android:id="@+id/navigation_stats"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_stats" />
+
+</menu>

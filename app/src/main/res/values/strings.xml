@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyHealth</string>
+    <string name="title_weight">Weight</string>
+    <string name="title_blood_pressure">Blood Pressure</string>
+    <string name="title_stats">Stats</string>
+    <string name="text_weightPickerDivider">,</string>
+    <string name="Saved">Saved</string>
+    <string name="text_bloodPressureDivider">/</string>
+    <string name="weightCaption">Save your weight</string>
+    <string name="textDateTime">Date and time:</string>
+    <string name="textWeight">Weight:</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="bloodPressureCaption">Save your blood pressure</string>
+    <string name="textBloodPressure">Blood pressure:</string>
+</resources>
