@@ -55,7 +55,7 @@ public class WeightFragment extends Fragment {
         Weight lastWeight = getLastWeight();
         if (lastWeight != null) {
             weightPickerPrime.setValue((int) lastWeight.getValue());
-            weightPickerSecond.setValue((int)(lastWeight.getValue() - (int) lastWeight.getValue()) *10);
+            weightPickerSecond.setValue((int)((lastWeight.getValue() - (int) lastWeight.getValue()) *10));
         }
         buttonOk = view.findViewById(R.id.button_ok);
         buttonOk.setOnClickListener(new View.OnClickListener() {
