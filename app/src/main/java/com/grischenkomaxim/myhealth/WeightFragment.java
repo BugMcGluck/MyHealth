@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,7 @@ public class WeightFragment extends Fragment {
     NumberPicker weightPickerPrime, weightPickerSecond;
     Button buttonOk;
     TextView weightTime, weightDate;
+
     public WeightFragment() {
     }
 
@@ -49,7 +51,12 @@ public class WeightFragment extends Fragment {
         weightPickerSecond = (NumberPicker) view.findViewById(R.id.weightPickerSecond);
         weightPickerSecond.setMaxValue(9);
         weightPickerSecond.setMinValue(0);
-        weightPickerSecond.setDisplayedValues(new String[] {"000", "100", "200", "300", "400", "500", "600", "700", "800", "900"});
+        weightPickerSecond.setDisplayedValues(new String[]{"000", "100", "200", "300", "400", "500", "600", "700", "800", "900"});
+        Weight lastWeight = getLastWeight();
+        if (lastWeight != null) {
+            weightPickerPrime.setValue((int) lastWeight.getValue());
+            weightPickerSecond.setValue((int)(lastWeight.getValue() - (int) lastWeight.getValue()) *10);
+        }
         buttonOk = view.findViewById(R.id.button_ok);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +75,10 @@ public class WeightFragment extends Fragment {
         weightDate = view.findViewById(R.id.weightDate);
         weightDate.setText(
                 (Calendar.getInstance().get(DAY_OF_MONTH) < 10 ? "0" + Calendar.getInstance().get(DAY_OF_MONTH) : Calendar.getInstance().get(DAY_OF_MONTH)) +
-                "." +
-                (Calendar.getInstance().get(MONTH) < 9 ? "0" + (Calendar.getInstance().get(MONTH) + 1) : (Calendar.getInstance().get(MONTH) + 1)) +
-                "." +
-                Calendar.getInstance().get(YEAR)
+                        "." +
+                        (Calendar.getInstance().get(MONTH) < 9 ? "0" + (Calendar.getInstance().get(MONTH) + 1) : (Calendar.getInstance().get(MONTH) + 1)) +
+                        "." +
+                        Calendar.getInstance().get(YEAR)
         );
         weightDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,13 +110,13 @@ public class WeightFragment extends Fragment {
     }
 
     private void saveWeight(NumberPicker weightPickerPrime, NumberPicker weightPickerSecond) {
-        final Weight newWeight  = new Weight();
+        final Weight newWeight = new Weight();
         newWeight.setTime(new Date());
-        float newMass = weightPickerPrime.getValue() + weightPickerSecond.getValue()* 0.1F;
+        float newMass = weightPickerPrime.getValue() + weightPickerSecond.getValue() * 0.1F;
         newWeight.setValue(newMass);
         newWeight.setUpdate_time();
 
-        class SaveWeight extends AsyncTask <Void, Void, Void>{
+        class SaveWeight extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -120,7 +127,6 @@ public class WeightFragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-            //    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 Toast.makeText(getActivity(), getString(R.string.Saved), Toast.LENGTH_LONG).show();
             }
 
@@ -144,6 +150,38 @@ public class WeightFragment extends Fragment {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private Weight getLastWeight() {
+
+        class GetLastWeight extends AsyncTask<Void, Void, Weight> {
+
+            @Override
+            protected Weight doInBackground(Void... voids) {
+                Weight lastWeight;
+                lastWeight = DataBaseClient.getInstance(getActivity()).getAppDatabase().weightDao().getLast();
+                if (lastWeight != null)
+                    return lastWeight;
+                else return null;
+            }
+
+            @Override
+            protected void onPostExecute(Weight aVoid) {
+                super.onPostExecute(aVoid);
+            }
+
+        }
+
+        GetLastWeight glw = new GetLastWeight();
+        glw.execute();
+        try {
+            return glw.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
