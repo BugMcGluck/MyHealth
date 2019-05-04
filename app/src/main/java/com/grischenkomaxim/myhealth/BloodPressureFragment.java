@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,11 @@ public class BloodPressureFragment extends Fragment {
         bloodPressurePickerDiastolic = view.findViewById(R.id.bloodPressurePickerDiastolic);
         bloodPressurePickerDiastolic.setMaxValue(130);
         bloodPressurePickerDiastolic.setMinValue(40);
+        BloodPressure lastBloodPressure = getLastBloodPressure();
+        if (lastBloodPressure != null){
+            bloodPressurePickerSystolic.setValue(lastBloodPressure.getValueSystolic());
+            bloodPressurePickerDiastolic.setValue(lastBloodPressure.getValueDiastolic());
+        }
         buttonOk = view.findViewById(R.id.button_ok);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,5 +146,37 @@ public class BloodPressureFragment extends Fragment {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private BloodPressure getLastBloodPressure() {
+
+        class GetLastBloodPressure extends AsyncTask<Void, Void, BloodPressure> {
+
+            @Override
+            protected BloodPressure doInBackground(Void... voids) {
+                BloodPressure lastBloodPressure;
+                lastBloodPressure = DataBaseClient.getInstance(getActivity()).getAppDatabase().bloodPressureDao().getLast();
+                if (lastBloodPressure != null)
+                    return lastBloodPressure;
+                else return null;
+            }
+
+            @Override
+            protected void onPostExecute(BloodPressure aVoid) {
+                super.onPostExecute(aVoid);
+            }
+
+        }
+
+        GetLastBloodPressure glbp = new GetLastBloodPressure();
+        glbp.execute();
+        try {
+            return glbp.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
