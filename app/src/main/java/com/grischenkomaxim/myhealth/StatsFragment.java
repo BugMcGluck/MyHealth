@@ -22,7 +22,7 @@ public class StatsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ViewPager statsViewPager = view.findViewById(R.id.statsViewPager);
         String tabTitles[] = new String[] {getActivity().getString(R.string.textWeight), getActivity().getString(R.string.textBloodPressure)};
-        statsViewPager.setAdapter(new StatsPageFragmentAdapter(getFragmentManager(), tabTitles));
+        statsViewPager.setAdapter(new StatsPageFragmentAdapter(getChildFragmentManager(), tabTitles));
         return view;
     }
 }
