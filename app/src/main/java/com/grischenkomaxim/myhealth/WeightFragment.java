@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -45,6 +47,7 @@ public class WeightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
+        final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         weightPickerPrime = (NumberPicker) view.findViewById(R.id.weightPickerPrime);
         weightPickerPrime.setMaxValue(150);
         weightPickerPrime.setMinValue(0);
@@ -57,13 +60,7 @@ public class WeightFragment extends Fragment {
             weightPickerPrime.setValue((int) lastWeight.getValue());
             weightPickerSecond.setValue((int)(lastWeight.getValue() - (int) lastWeight.getValue()) *10);
         }
-        buttonOk = view.findViewById(R.id.button_ok);
-        buttonOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveWeight(weightPickerPrime, weightPickerSecond);
-            }
-        });
+
         weightTime = view.findViewById(R.id.weightTime);
         weightTime.setText((Calendar.getInstance().get(HOUR_OF_DAY) < 10 ? "0" + Calendar.getInstance().get(HOUR_OF_DAY) : Calendar.getInstance().get(HOUR_OF_DAY)) + ":" + (Calendar.getInstance().get(MINUTE) < 10 ? "0" + Calendar.getInstance().get(MINUTE) : Calendar.getInstance().get(MINUTE)));
         weightTime.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +81,17 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openDateDialog();
+            }
+        });
+        buttonOk = view.findViewById(R.id.button_ok);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    saveWeight(weightPickerPrime, weightPickerSecond, sdf.parse(weightDate.getText() + " " + weightTime.getText()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;
@@ -109,9 +117,9 @@ public class WeightFragment extends Fragment {
         timePickerDialog.show();
     }
 
-    private void saveWeight(NumberPicker weightPickerPrime, NumberPicker weightPickerSecond) {
+    private void saveWeight(NumberPicker weightPickerPrime, NumberPicker weightPickerSecond, Date date) {
         final Weight newWeight = new Weight();
-        newWeight.setTime(new Date());
+        newWeight.setTime(date);
         float newMass = weightPickerPrime.getValue() + weightPickerSecond.getValue() * 0.1F;
         newWeight.setValue(newMass);
         newWeight.setUpdate_time();
