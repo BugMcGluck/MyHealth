@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -42,6 +44,7 @@ public class BloodPressureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blood_pressure, container, false);
+        final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         bloodPressurePickerSystolic = view.findViewById(R.id.bloodPressurePickerSystolic);
         bloodPressurePickerSystolic.setMaxValue(250);
         bloodPressurePickerSystolic.setMinValue(50);
@@ -53,13 +56,7 @@ public class BloodPressureFragment extends Fragment {
             bloodPressurePickerSystolic.setValue(lastBloodPressure.getValueSystolic());
             bloodPressurePickerDiastolic.setValue(lastBloodPressure.getValueDiastolic());
         }
-        buttonOk = view.findViewById(R.id.button_ok);
-        buttonOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveBloodPressure(bloodPressurePickerSystolic.getValue(), bloodPressurePickerDiastolic.getValue());
-            }
-        });
+
         bloodPressuretTime = view.findViewById(R.id.bloodPressureTime);
         bloodPressuretTime.setText((Calendar.getInstance().get(HOUR_OF_DAY) < 10 ? "0" + Calendar.getInstance().get(HOUR_OF_DAY) : Calendar.getInstance().get(HOUR_OF_DAY)) + ":" + (Calendar.getInstance().get(MINUTE) < 10 ? "0" + Calendar.getInstance().get(MINUTE) : Calendar.getInstance().get(MINUTE)));
         bloodPressuretTime.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +77,17 @@ public class BloodPressureFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openDateDialog();
+            }
+        });
+        buttonOk = view.findViewById(R.id.button_ok);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    saveBloodPressure(bloodPressurePickerSystolic.getValue(), bloodPressurePickerDiastolic.getValue(), sdf.parse(bloodPressureDate.getText()+ " " + bloodPressuretTime.getText()) );
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;
@@ -104,9 +112,9 @@ public class BloodPressureFragment extends Fragment {
         }, Calendar.getInstance().get(HOUR_OF_DAY), Calendar.getInstance().get(MINUTE), true);
         timePickerDialog.show();
     }
-    private void saveBloodPressure(int bloodPressureSystolic, int bloodPressureDiastolic) {
+    private void saveBloodPressure(int bloodPressureSystolic, int bloodPressureDiastolic, Date date) {
         final BloodPressure newBloodPressure  = new BloodPressure();
-        newBloodPressure.setTime(new Date());
+        newBloodPressure.setTime(date);
         newBloodPressure.setValueSystolic(bloodPressureSystolic);
         newBloodPressure.setValueDiastolic(bloodPressureDiastolic);
         newBloodPressure.setUpdate_time();
