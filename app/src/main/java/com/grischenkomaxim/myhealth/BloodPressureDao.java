@@ -11,7 +11,7 @@ import androidx.room.Update;
 @Dao
 public interface BloodPressureDao {
     //Получение всех записей
-    @Query("SELECT * FROM bloodpressure")
+    @Query("SELECT * FROM bloodpressure order by time desc")
     List<BloodPressure> getAll();
 
     //Получение последней записи

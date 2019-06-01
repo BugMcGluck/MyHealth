@@ -11,7 +11,7 @@ import androidx.room.Update;
 @Dao
 public interface WeightDao {
     //Получение всех записей
-    @Query("SELECT * FROM weight")
+    @Query("SELECT * FROM weight order by time desc")
     List<Weight> getAll();
 
     //Получение последней записи
