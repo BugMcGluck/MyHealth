@@ -2,6 +2,7 @@
     <string name="app_name">MyHealth</string>
     <string name="title_weight">Weight</string>
     <string name="title_blood_pressure">Blood Pressure</string>
+    <string name="title_water">Water</string>
     <string name="title_stats">Stats</string>
     <string name="text_weightPickerDivider">,</string>
     <string name="Saved">Saved</string>
@@ -13,4 +14,6 @@
     <string name="cancel">Cancel</string>
     <string name="bloodPressureCaption">Save your blood pressure</string>
     <string name="textBloodPressure">Blood pressure:</string>
+    <string name="texDrink">Drink:</string>
+    <string name="textWater">Water:</string>
 </resources>

@@ -95,6 +95,18 @@ public class StatsPageFragment extends Fragment {
                             }
                         }
                         break;
+                    case 2 :
+                        List<Water> waterList = DataBaseClient.getInstance(getActivity()).getAppDatabase().waterDao().getAll();
+                        if (waterList.size() > 0) {
+                            for (Water water : waterList
+                            ) {
+                                m = new HashMap<>();
+                                m.put(DATE, df[0].format(water.getDateTime()));
+                                m.put(VALUE, String.valueOf(water.getValue()));
+                                stringList.add(m);
+                            }
+                        }
+                        break;
                 }
 
 

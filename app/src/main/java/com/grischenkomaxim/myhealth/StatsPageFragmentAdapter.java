@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 
 public class StatsPageFragmentAdapter extends FragmentPagerAdapter {
-    private static final int PAGE_COUNT = 2;
+    private static final int PAGE_COUNT = 3;
     String tabTitles[];
 
     public StatsPageFragmentAdapter(FragmentManager fm, String tabTitles[]) {

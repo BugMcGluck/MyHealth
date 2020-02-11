@@ -21,7 +21,7 @@ public class StatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ViewPager statsViewPager = view.findViewById(R.id.statsViewPager);
-        String tabTitles[] = new String[] {getActivity().getString(R.string.textWeight), getActivity().getString(R.string.textBloodPressure)};
+        String tabTitles[] = new String[] {getActivity().getString(R.string.textWeight), getActivity().getString(R.string.textBloodPressure), getActivity().getString(R.string.textWater)};
         statsViewPager.setAdapter(new StatsPageFragmentAdapter(getChildFragmentManager(), tabTitles));
         return view;
     }

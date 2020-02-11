@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="200.0"
+    android:viewportHeight="200.0"
+    android:name="Стакан">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M 40 22 L 64 188 L 136 188 L 160 22 h -10 L 126 178 L 74 178 L 50 22Z"/>
+</vector>

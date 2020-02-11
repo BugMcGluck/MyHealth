@@ -6,6 +6,7 @@
     <string name="text_weightPickerDivider">,</string>
     <string name="title_weight">Вес</string>
     <string name="title_blood_pressure">Давление</string>
+    <string name="title_water">Вода</string>
     <string name="title_stats">Дневник</string>
     <string name="weightCaption">Записать свой вес</string>
     <string name="textDateTime">Дата и время:</string>
@@ -14,4 +15,6 @@
     <string name="cancel">Отмена</string>
     <string name="bloodPressureCaption">Записать своё давление</string>
     <string name="textBloodPressure">Кровяное давление:</string>
+    <string name="texDrink">Выпито:</string>
+    <string name="textWater">Вода:</string>
 </resources>

@@ -11,7 +11,10 @@
         android:id="@+id/navigation_blood_pressure"
         android:icon="@mipmap/ic_blood_pressure"
         android:title="@string/title_blood_pressure" />
-
+    <item
+        android:id="@+id/navigation_water"
+        android:icon="@drawable/ic_water"
+        android:title="@string/title_water" />
     <item
         android:id="@+id/navigation_stats"
         android:icon="@mipmap/ic_stats"

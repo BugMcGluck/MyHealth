@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_blood_pressure:
                     loadFragment(BloodPressureFragment.newInstance());
                     return true;
+                case R.id.navigation_water:
+                    loadFragment(WaterFragment.newInstance());
+                    return true;
                 case R.id.navigation_stats:
                     loadFragment(StatsFragment.newInstance());
                     return true;
