@@ -32,6 +32,31 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="30sp">
+
+        <TextView
+            android:id="@+id/textDayDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dayDrink"
+            android:textAlignment="textEnd"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dayDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="5sp"
+            android:textAlignment="textStart"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

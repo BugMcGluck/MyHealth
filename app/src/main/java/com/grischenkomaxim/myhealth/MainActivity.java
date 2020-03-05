@@ -28,8 +28,12 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(WaterFragment.newInstance());
                     return true;
                 case R.id.navigation_stats:
-                    loadFragment(StatsFragment.newInstance());
+                    loadFragment(StatsFragment.newInstance(StatsFragment.Types.STATS));
                     return true;
+                case R.id.navigation_charts:
+                    loadFragment(StatsFragment.newInstance(StatsFragment.Types.CHARTS));
+                    return true;
+
             }
             return false;
         }

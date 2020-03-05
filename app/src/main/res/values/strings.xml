@@ -16,4 +16,6 @@
     <string name="textBloodPressure">Blood pressure:</string>
     <string name="texDrink">Drink:</string>
     <string name="textWater">Water:</string>
+    <string name="dayDrink">Day drink:</string>
+    <string name="title_charts">Charts</string>
 </resources>

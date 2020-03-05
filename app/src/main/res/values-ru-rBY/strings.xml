@@ -17,4 +17,6 @@
     <string name="textBloodPressure">Кровяное давление:</string>
     <string name="texDrink">Выпито:</string>
     <string name="textWater">Вода:</string>
+    <string name="dayDrink">Выпито за день:</string>
+    <string name="title_charts">Графики</string>
 </resources>
