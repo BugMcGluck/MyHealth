@@ -1,0 +1,8 @@
+<application>
+  <component name="AsciidocApplicationSettings">
+    <option name="pluginVersion" value="0.36.19" />
+    <AsciiDocPreviewSettings KrokiUrl="" HideErrorsByLanguage="">
+      <option name="hideErrorsByLanguage" value="" />
+    </AsciiDocPreviewSettings>
+  </component>
+</application>
