@@ -4,10 +4,5 @@
     <option name="customPlantumlJarPath" value="" />
     <option name="includedPaths" value="" />
     <option name="lastBundledVersion" value="1.2022.12" />
-    <option name="previewSettings">
-      <PreviewSettings>
-        <option name="splitEditorLayout" value="Show preview only" />
-      </PreviewSettings>
-    </option>
   </component>
 </application>
