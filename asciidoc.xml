@@ -1,6 +1,6 @@
 <application>
   <component name="AsciidocApplicationSettings">
-    <option name="pluginVersion" value="0.37.54" />
+    <option name="pluginVersion" value="0.37.56" />
     <AsciiDocPreviewSettings KrokiUrl="" EnabledFoldedAttributeReferencedExperimental="true" HideErrorsByLanguage="">
       <option name="hideErrorsByLanguage" value="" />
     </AsciiDocPreviewSettings>
